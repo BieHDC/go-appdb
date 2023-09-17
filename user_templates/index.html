@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Application List for ReactOS v0.1</title>
+    <link rel="stylesheet" type="text/css" href="/resources/style.css">
+    <link rel="icon" href="/resources/favicon.ico" type="image/x-icon">
+  </head>
+  <body>
+    <main>
+      <header>
+        <div>
+          <label><a href="/">Home</a></label>
+          <label><a href="/about">About</a></label>
+          {{ if (eq .PG.TotalPages 0) }}
+            <!-- Makes no sense to be displayed in a paginated page -->
+            <label><p>Entries: {{ .NumApps }}</p></label>
+          {{ end }}
+          {{ if .Searchtime }}
+            <label><p>Searchtime: {{ .Searchtime }}</p></label>
+          {{ end }}
+        </div>
+      </header>
+      <br>
+
+      {{ if (ne .PG.TotalPages 0) }}
+      <!-- Only makes sense when we have pages -->
+        {{ if (ne .PG.IsFirstPage true) }}
+        <a
+          href="/?page={{ .PG.PreviousPage }}"
+          >Previous</a
+        >
+        <br>
+        {{ end }}
+        {{ if (ne .PG.IsLastPage true) }}
+        <a
+          href="/?page={{ .PG.NextPage }}"
+          >Next</a
+        >
+        <br>
+        {{ end }}
+        <p>Page {{ .PG.GetPageCounter }}</p>
+      {{ end }}
+
+      <a
+        href="/?page=all"
+        >Show All</a
+      >
+      <br>
+
+      <form action="/search" method="GET">
+        <section>
+          <table>
+            <tr>
+              <th>Application Name</th>
+              <th><div id="tooltipdouble" class="tooltip">Useability
+                <span class="tooltiptext">1 star = Broken<br>2 stars = Major functionality issues and/or frequent hangs/crashes<br>3 stars = Minor functionality issues and/or infrequent hangs/crashes<br>4 stars = Fully functional (though some visual or auditory glitches may still occur)<br>5 stars = Perfect</span>
+              </div></th>
+              <th>Version</th>
+              <th>ReactOS Version</th>
+              <th>Tags</th>
+              <th>Workarounds</th>
+            </tr>
+            <tr>
+              <th>
+                <input type="search" autofocus placeholder="Name" name="appname" value="{{ .Cons.Name }}"/>
+              </th>
+              <th>
+                <select name="useability">
+                  <option value="None" selected>None</option>
+                  <option value="1" {{ if (eq .Cons.Useability 1)}} selected {{ end }} >>= 1</option>
+                  <option value="2" {{ if (eq .Cons.Useability 2)}} selected {{ end }} >>= 2</option>
+                  <option value="3" {{ if (eq .Cons.Useability 3)}} selected {{ end }} >>= 3</option>
+                  <option value="4" {{ if (eq .Cons.Useability 4)}} selected {{ end }} >>= 4</option>
+                  <option value="5" {{ if (eq .Cons.Useability 5)}} selected {{ end }} >>= 5</option>
+                </select>
+              </div>
+              </th>
+              <th></th>
+              <th>
+                <input type="search" placeholder="ReactOS Version" name="rosversion" size="14" value="{{ .Cons.RosVersion }}"/>
+              </th>
+              <th>
+                <input type="search" placeholder="Tags" name="tags" value="{{ .ConsToString }}"/>
+              </th>
+              <th>
+                <input type="submit" value="Search"/>
+              </th>
+            </tr>
+
+            {{ range .Apps }}
+            <tr>
+              <td><a href="/app/{{ .Name }}">{{ .Name }}</a></td>
+              <td>{{ .Useability }}</td>
+              <td>{{ .Version }}</td>
+              <td>{{ .RosVersion }}</td>
+              <td>
+                {{ range .Tags }}
+                  <a href="/search?tags={{ . }}" >#{{ . }}</a>
+                {{ end }}
+              </td>
+              <td>{{ .Workarounds }}</td>
+            </tr>
+            {{ end }}
+
+          </table>
+          {{ if not .Apps }}
+            <h1>No Results!</h1>
+          {{ end }}
+        </section>
+      </form>
+    </main>
+  </body>
+</html>

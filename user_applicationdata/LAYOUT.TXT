@@ -1,0 +1,13 @@
+Name;Example Application #Mandatory!
+Version;4.20 #Mandatory!
+Useability;3 #Mandatory!
+RosVersion;0.4.13-i386 #Mandatory! Also stick to ">i386</>amd64</>unknown<"
+Tags;sneed,chuck,kek #Mandatory!
+Workarounds;Short Desc if workarounds needed (for example: "copy some.dll from xp")
+ProgramDetails;The description of what it does. This is a file manager with tabs and picture preview, and its also very fast!
+KnownIssues;Sometimes the graphics flicker.
+Downloads;The Application;http://web.site/nc.exe
+Downloads;Some DLL;http://3rdparty.ru/some.dll
+Downloads;Dark theme file;http://sneed.ch/darkerthana.theme
+Screenshots;main view;exampleapp_pic1.png
+Screenshots;info dialog;exampleapp_pic2.png
