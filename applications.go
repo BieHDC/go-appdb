@@ -13,6 +13,8 @@ import (
 )
 
 type Applications struct {
+	Title string
+
 	NumApps uint //only needed to display num Apps without re-len()-ing
 	Apps    []*Application
 
@@ -44,8 +46,8 @@ func (apps *Applications) ConsToString() string {
 	return final
 }
 
-func NewApplications() *Applications {
-	return &Applications{}
+func NewApplications(title string) *Applications {
+	return &Applications{Title: title}
 }
 
 func (apps *Applications) FindEntry(name string) *Application {
@@ -74,8 +76,8 @@ func (apps *Applications) GetSlice(fulllist *Applications) {
 	apps.NumApps = uint(len(apps.Apps))
 }
 
-func NewApplicationsFromPath(path string) (*Applications, error) {
-	apps := NewApplications()
+func NewApplicationsFromPath(path string, title string) (*Applications, error) {
+	apps := NewApplications(title)
 
 	files, err := os.ReadDir(path)
 	if err != nil {

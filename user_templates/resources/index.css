@@ -1,0 +1,103 @@
+body {
+background-attachment: fixed;
+background-repeat: no-repeat;
+background-size: 100% 100%;
+background-image: url("background.jpg");
+}
+
+.applist {
+	/* Parts of this generated from css.glass, super helpful resource */
+border-collapse: collapse;
+background: rgba(255, 255, 255, 0.1);
+color: rgba(255, 255, 255, 1);
+font-size: 1vw;
+font-family: Arial, Helvetica, sans-serif;
+border-radius: 4px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(20px);
+-webkit-backdrop-filter: blur(20px);
+}
+
+.programdescription {
+	/* Parts of this generated from css.glass, super helpful resource */
+padding: 8px;
+width: 50vw;
+border-collapse: collapse;
+background: rgba(255, 255, 255, 0.1);
+color: rgba(255, 255, 255, 1);
+font-size: 1vw;
+font-family: Arial, Helvetica, sans-serif;
+border-radius: 4px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(20px);
+-webkit-backdrop-filter: blur(20px);
+
+}
+
+th, td {
+padding: 8px;
+text-align: left;
+border: 1px solid rgb(255, 255, 255, .25);
+}
+
+.applist input[type=text] {
+background: rgba(255, 255, 255, 0.25);
+color: rgba(255, 255, 255, 1);
+font-size: 1vw;
+font-family: Arial, Helvetica, sans-serif;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+border: none;
+backdrop-filter: blur(20px);
+-webkit-backdrop-filter: blur(20px);
+}
+
+button {
+background: rgba(255, 255, 255, 0.25);
+color: rgba(255, 255, 255, 1);
+font-size: 1vw;
+font-family: Arial, Helvetica, sans-serif;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+border: none;
+padding: 4px;
+backdrop-filter: blur(20px);
+-webkit-backdrop-filter: blur(20px);
+}
+
+p1 {
+color: rgba(255, 255, 255, 1);
+font-size: 1vw;
+font-family: Arial, Helvetica, sans-serif;
+}
+
+figure {
+	float:left;
+	font-style: italic;
+	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+img {
+width: 25vw;
+}
+
+p2 {
+color: rgba(255, 255, 0, 1);
+float:left;
+}
+
+p5 {
+color: rgba(255, 255, 255, 1);
+font-size: 1vw;
+font-family: Arial, Helvetica, sans-serif;
+}
+
+h3 {
+color: rgba(255, 255, 255, 1);
+font-size: 1.5em;
+font-family: Arial, Helvetica, sans-serif;
+}
+
+h4 {
+color: rgba(255, 255, 255, 1);
+font-size: 1.5em;
+font-family: Arial, Helvetica, sans-serif;
+}

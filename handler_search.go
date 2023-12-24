@@ -58,7 +58,7 @@ func parseSearchGetRequest(r *http.Request) (Constraints, error) {
 }
 
 func (fulllist *Applications) GetMatches(cons Constraints) *Applications {
-	searched := NewApplications()
+	searched := NewApplications(fulllist.Title)
 	searched.Cons = cons                        // Needs to be reported back to the ui
 	searched.Apps = make([]*Application, 0, 10) // 10 Results should be about accurate
 

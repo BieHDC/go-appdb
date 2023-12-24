@@ -9,12 +9,10 @@ import (
 	"time"
 )
 
-// Next:
+// Fixme Todo:
+// 	Audit
 // 	Make a gui for submitting stuff?
 // 	New format for files?
-
-// Todo:
-//	Audit
 
 // Decisions:
 //   - there will be no hot reloading, not worth it, just restart the thing, nobody will notice.
@@ -32,7 +30,7 @@ func main() {
 		panic("you need to have at least one entry per page")
 	}
 
-	apps, err := NewApplicationsFromPath(*applicationdata)
+	apps, err := NewApplicationsFromPath(*applicationdata, "Application List for ReactOS v0.2")
 	if err != nil {
 		panic(err)
 	}

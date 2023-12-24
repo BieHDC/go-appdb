@@ -6,54 +6,75 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>{{ .Name }} -  Details</title>
     <link rel="stylesheet" type="text/css" href="/resources/style.css">
+    <style>
+      p {
+        max-width: 70%;
+      }
+    </style>
     <link rel="icon" href="/resources/favicon.ico" type="image/x-icon">
   </head>
   <body>
-    <main>
+    <main><center>
       <header>
         <div>
-          <label><a href="/">Return To Mainpage</a></label>
+          <br>
+          <label><a class="button button-bigger" href="/">Return To Mainpage</a></label>
         </div>
       </header>
       <br>
       <h1>Details for <a href="/app/{{ .Name }}">{{ .Name }} {{ .Version }}</a></h1>
       <br>
 
-      <h3>Tags</h3>
-        {{ range .Tags }}
-          <a href="/search?tags={{ . }}" >#{{ . }}</a>
-        {{ end }}
-      <br>
+      <!-- We only create the table if we have a screenshot -->
+      {{ if .MainScreenshot.Val }}
+      <table><tr>
+        <td align="right">
+          <figure>
+            <img src="/screenshots/{{ .MainScreenshot.Val }}">
+            <figcaption>{{ .MainScreenshot.Key }}</figcaption>
+          </figure>
+        </td>
 
-      <h3>Rating</h3>
-      <div id="tooltiphalf" class="tooltip">
-        <p>This program is rated as having {{ if (eq .Useability 1)}}1 star{{ end }}{{ if (eq .Useability 2)}}2 stars{{ end }}{{ if (eq .Useability 3)}}3 stars{{ end }}{{ if (eq .Useability 4)}}4 stars{{ end }}{{ if (eq .Useability 5)}}5 stars{{ end }}</p>
-      <span class="tooltiptext">1 star = Broken<br>2 stars = Major functionality issues and/or frequent hangs/crashes<br>3 stars = Minor functionality issues and/or infrequent hangs/crashes<br>4 stars = Fully functional (though some visual or auditory glitches may still occur)<br>5 stars = Perfect
-          <br></span>
-      </div>
-      <p>Tested with ReactOS {{ .RosVersion }}</p>
+        <td>
+      {{ end }}
+          <p>Tags:
+            {{ range .Tags }}
+              <a href="/search?tags={{ . }}" >#{{ . }}</a>
+            {{ end }}
+          </p>
+          <p>Rating: <span id="tooltiphalf" class="tooltip">{{ if (eq .Useability 1)}}1 star{{ end }}{{ if (eq .Useability 2)}}2 stars{{ end }}{{ if (eq .Useability 3)}}3 stars{{ end }}{{ if (eq .Useability 4)}}4 stars{{ end }}{{ if (eq .Useability 5)}}5 stars{{ end }}<span id="tooltipforcewidth" class="tooltiptext">1 star = Broken<br>2 stars = Major functionality issues and/or frequent hangs/crashes<br>3 stars = Minor functionality issues and/or infrequent hangs/crashes<br>4 stars = Fully functional (though some visual or auditory glitches may still occur)<br>5 stars = Perfect<br></span></span>
+          </p>
+          <p>Tested with ReactOS {{ .RosVersion }}</p>
+          <p>Downloads: <br>
+            {{ range .Downloads }}
+              <a target="_blank" rel="noopener" href="{{ .Val }}">{{ .Key }}</a>
+              <br>
+            {{ end }}
+          </p>
+      {{ if .MainScreenshot.Val }}
+        </td>
+      </tr></table>
+      {{ end }}
 
       <h3>Program Details</h3>
       <p>{{ .ProgramDetails }}</p>
       <br>
 
-      <h3>Download</h3>
-      {{ range .Downloads }}
-        <a target="_blank" rel="noopener" href="{{ .Val }}">{{ .Key }}</a>
+
+      {{ if .KnownIssues }}
+        <h3>Known issues</h3>
+        <p>{{ .KnownIssues }}</p>
         <br>
       {{ end }}
-      <br>
 
-      <h3>Known issues</h3>
-      <p>{{ .KnownIssues }}</p>
-      <br>
-
-      <h3>Photo gallery</h3>
-      <!-- fixme needs some resizing probably-->
-      {{ range .Screenshots }}
-        <label><img src="/screenshots/{{ .Val }}" alt="{{ .Key }}"></label>
+      {{ if .Screenshots }}
+        <h3>Photo gallery</h3>
+        <!-- fixme needs some resizing probably-->
+        {{ range .Screenshots }}
+          <label><img src="/screenshots/{{ .Val }}" alt="{{ .Key }}"></label>
+        {{ end }}
       {{ end }}
 
-    </main>
+    </center></main>
   </body>
 </html>

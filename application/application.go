@@ -25,7 +25,8 @@ type Application struct {
 	ProgramDetails string   `json:"-"`
 	KnownIssues    string   `json:"-"` //long workaround/instructions
 	Downloads      []KeyVal `json:"-"` //key: desc, value:link
-	Screenshots    []KeyVal `json:"-"` //key: desc, value:filename
+	MainScreenshot KeyVal   `json:"-"` //the one displayed
+	Screenshots    []KeyVal `json:"-"` //the others. key: desc, value:filename
 }
 
 // Use strings.NewReader to make an io.Reader
@@ -84,6 +85,11 @@ func ApplicationFromCSV(source io.Reader) (*Application, error) {
 		case "Screenshots":
 			if len(record) < 3 {
 				errfin = errors.Join(errfin, fmt.Errorf("Screenshots entry too short"))
+				continue
+			}
+			if app.MainScreenshot.Val == "" {
+				app.MainScreenshot.Key = record[1]
+				app.MainScreenshot.Val = record[2]
 				continue
 			}
 			app.Screenshots = append(app.Screenshots, KeyVal{record[1], record[2]})

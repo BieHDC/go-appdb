@@ -4,23 +4,38 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Application List for ReactOS v0.1</title>
+    <title>{{ .Title }}</title>
     <link rel="stylesheet" type="text/css" href="/resources/style.css">
+    <style>
+      table {
+        padding: 5px;
+        text-align: left;
+        border: 1px solid rgb(255, 255, 255, .25);
+      }
+
+      th, td {
+        padding: 5px;
+        background: rgba(255, 255, 255, 0.1);
+        font-size: 1vw;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      }
+    </style>
     <link rel="icon" href="/resources/favicon.ico" type="image/x-icon">
   </head>
   <body>
-    <main>
+    <main><center>
       <header>
-        <div>
-          <label><a href="/">Home</a></label>
-          <label><a href="/about">About</a></label>
-          {{ if (eq .PG.TotalPages 0) }}
-            <!-- Makes no sense to be displayed in a paginated page -->
-            <label><p>Entries: {{ .NumApps }}</p></label>
-          {{ end }}
-          {{ if .Searchtime }}
-            <label><p>Searchtime: {{ .Searchtime }}</p></label>
-          {{ end }}
+          <div><!-- STUPID ISSUE - STUPID FIX
+            --><label><a class="button button-bigger" href="/">Home</a></label><!--
+            --><label><a class="button button-bigger" href="/about">About</a></label><!--
+            --><label><a class="button button-bigger" href="/?page=all" >Show All</a></label>
+            {{ if (eq .PG.TotalPages 0) }}
+              <!-- Makes no sense to be displayed in a paginated page -->
+              <label><p>Entries: {{ .NumApps }}</p></label>
+            {{ end }}
+            {{ if .Searchtime }}
+              <label><p>Searchtime: {{ .Searchtime }}</p></label>
+            {{ end }}
         </div>
       </header>
       <br>
@@ -29,25 +44,30 @@
       <!-- Only makes sense when we have pages -->
         {{ if (ne .PG.IsFirstPage true) }}
         <a
+          class="button"
           href="/?page={{ .PG.PreviousPage }}"
-          >Previous</a
+          >Previous Page</a
         >
-        <br>
+        {{ else }}
+        <a
+          class="button button-disabled"
+          >Previous Page</a
+        >
         {{ end }}
         {{ if (ne .PG.IsLastPage true) }}
         <a
+          class="button"
           href="/?page={{ .PG.NextPage }}"
-          >Next</a
+          >Next Page</a
         >
-        <br>
+        {{ else }}
+        <a
+          class="button button-disabled"
+          >Next Page</a
+        >
         {{ end }}
         <p>Page {{ .PG.GetPageCounter }}</p>
       {{ end }}
-
-      <a
-        href="/?page=all"
-        >Show All</a
-      >
       <br>
 
       <form action="/search" method="GET">
@@ -111,6 +131,6 @@
           {{ end }}
         </section>
       </form>
-    </main>
+    </center></main>
   </body>
 </html>

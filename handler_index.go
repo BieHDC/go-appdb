@@ -68,7 +68,7 @@ func generateAllPages(apps *Applications, entriesperpage uint, indextemplate *te
 	allpages := make(map[uint]*bytes.Buffer)
 
 	//static
-	paged := NewApplications()
+	paged := NewApplications(apps.Title)
 	paged.PG.EntriesPerPage = entriesperpage
 	paged.PG.TotalPages = uint(math.Ceil(float64(len(apps.Apps)) / float64(paged.PG.EntriesPerPage)))
 
